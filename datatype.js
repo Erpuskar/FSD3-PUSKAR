@@ -1,0 +1,14 @@
+let a = 5;
+let b = 10;
+let c = a + b;
+var d = "Hello";
+console.log(typeof d);
+console.log(typeof c);
+const e = [1, 2, 3]; 
+console.log(typeof e);
+var f = { name: "John", age: 30 };
+console.log(typeof f);
+let x = 5;
+let y = 10;
+let z= x*y;
+console.log(typeof z);
