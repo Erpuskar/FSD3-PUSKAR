@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>keyboard Events</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function eventcall() {
+            alert('this is on click event');
+        }
+    </script>
+</head>
+
+<body>
+    <div id="form">
+        <h1 id="h1" onclick="eventcall()">Mouse Events</h1>
+        <p>onkeydown</p>
+        <input type="text" onkeydown="document.getElementById('form').style.background = this.value">
+        <p>onkeyup</p>
+        <input type="text" onkeyup="document.getElementById('form').style.background = this.value">
+        <p>onkeypress</p>
+        <input type="text" onkeypress="document.getElementById('form').style.background = this.value">
+    </div>
+
+</body>
+
+</html>

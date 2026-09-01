@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mouse Event Example</title>
+    </head>
+    <body>
+        <h1>Mouse Event Example</h1>
+        <div id="box" style="width: 300px; height: 300px; border: 1px solid black;">
+            Hover over this area
+
+        </div>
+        <div id="box" style="width: 300px; height: 300px; border: 1px solid black;" onmouseover="eventcall()">
+            Hover over this area to trigger an event
+        </div>
+        <div id="box" style="width: 300px; height: 300px; border: 1px solid black;" onmousedown="events()">
+            Click and hold this area to trigger an event
+        </div>
+        <script>
+            const box = document.getElementById('box');
+            box.addEventListener('mouseover', () => {
+                box.style.backgroundColor = 'lightblue';
+            });
+            box.addEventListener('mouseout', () => {
+                box.style.backgroundColor = '';
+            });
+            function eventcall(){
+                alert("Mouse event triggered!");
+            }
+            function events(){
+                alert("Mouse up down event triggered!");
+            }
+
+        </script>
+    </body>
+</html>

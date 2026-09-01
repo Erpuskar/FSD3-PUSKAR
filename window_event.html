@@ -1,0 +1,37 @@
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window Events</title>
+</head>
+
+<body>
+    <button onclick="openNewWindow()">Open New window</button>
+
+    <script>
+        function openNewWindow() {
+            // 1. Open the new window (url, target, features)
+            // Note: 'px' is removed, just use numbers
+            const myWindow = window.open("", "_blank", "width=300,height=200");
+            
+            // 2. Write content and styles inside the new window
+            myWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Popup Window</title>
+                </head>
+                <body style="border: 5px solid red; margin: 0; height: 100vh; box-sizing: border-box; display: flex; align-items: center; justify-content: center;">
+                    <p>New window with a red border!</p>
+                </body>
+                </html>
+            `);
+            
+            // 3. Close the document stream
+            myWindow.document.close();
+        }
+    </script>
+</body>
+</html>
