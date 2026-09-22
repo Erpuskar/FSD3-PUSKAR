@@ -4,7 +4,7 @@
         <title>Quiz Challenge</title>
     </head>
     <body>
-        <h1>Quiz Challenge</h1>
+        <h1 allign="center">Quiz Challenge</h1>
         <div id="form" style="width:400px; height: 300px; border:6px solid rgb(17, 16, 20);background-color: rgb(197, 181, 247);">
             <form>
                 <p>Name:</p>
@@ -21,6 +21,15 @@
             <input type="text" id="roll" placeholder="Roll No">
         </select>
         <button onclick="submit">Submit</button>
+        <script>
+            function submit() {
+                const name = document.getElementById('name').value;
+                const branch = document.getElementById('branch').value;
+                const gender = document.getElementById('gender').value;
+                const roll = document.getElementById('roll').value;
+                
+            }
+        </script>
         </form>
         <p>Answer the following question:</p>
         <p>1.What is the capital of France?</p>
@@ -66,6 +75,7 @@
        <p id="result"></p>
 
       <script>
+            
             function checkAnswer() {
                 const answer = document.getElementById('answer').value.trim().toLowerCase();
                 const result = document.getElementById('result');
