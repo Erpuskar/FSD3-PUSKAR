@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html
+    <head>
+        <title>Quiz Challenge</title>
+    </head>
+    <body>
+        <h1 allign="center">Quiz Challenge</h1>
+        <div id="form" style="width:400px; height: 300px; border:6px solid rgb(17, 16, 20);background-color: rgb(197, 181, 247);">
+            <form>
+                <p>Name:</p>
+            <input type="text" id="name" placeholder="Name">
+            <p>Branch:</p>
+            <input type="text" id="branch" placeholder="Branch">
+            <p>Gender:</p>
+            <select id="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <p>Roll No:</p>
+            <input type="text" id="roll" placeholder="Roll No">
+        </select>
+        <button onclick="submit">Submit</button>
+        <script>
+            function submit() {
+                const name = document.getElementById('name').value;
+                const branch = document.getElementById('branch').value;
+                const gender = document.getElementById('gender').value;
+                const roll = document.getElementById('roll').value;
+                
+            }
+        </script>
+        </form>
+        <p>Answer the following question:</p>
+        <p>1.What is the capital of France?</p>
+       <select id="answer">
+           <option value="paris">Paris</option>
+           <option value="london">London</option>
+           <option value="berlin">Berlin</option>
+           <option value="madrid">Madrid</option>
+       </select>
+       <button onclick="checkAnswer()">Submit</button>
+       <p>2.What is the capital of India?</p>
+       <select id="answer2">
+           <option value="new delhi">New Delhi</option>
+           <option value="mumbai">Mumbai</option>
+           <option value="bangalore">Bangalore</option>
+           <option value="hyderabad">Hyderabad</option>
+       </select>
+       <button onclick="checkAnswer2()">Submit</button>
+       <p>3.What is the capital of Japan?</p>
+       <select id="answer3">
+           <option value="tokyo">Tokyo</option>
+           <option value="osaka">Osaka</option>
+           <option value="kyoto">Kyoto</option>
+           <option value="hiroshima">Hiroshima</option>
+       </select>
+       <button onclick="checkAnswer3()">Submit</button>
+       <p>4.What is the capital of Australia?</p>
+       <select id="answer4">
+           <option value="canberra">Canberra</option>
+           <option value="sydney">Sydney</option>
+           <option value="melbourne">Melbourne</option>
+           <option value="brisbane">Brisbane</option>
+       </select>
+       <button onclick="checkAnswer4()">Submit</button>
+       <p>5.Full form of HTTPS</p>
+       <select id="answer5">
+           <option value="hypertext transfer protocol secure">Hypertext Transfer Protocol Secure</option>
+           <option value="hypertext transfer protocol">Hypertext Transfer Protocol</option>
+           <option value="hypertext to protocol secure">Hypertext Transfer Protocol Secure</option>
+           <option value="hypertext transfer protocol security">Hypertext Transfer Protocol Secure</option>
+       </select>
+       <button onclick="checkAnswer5()">Submit</button>
+       <p id="result"></p>
+
+      <script>
+            
+            function checkAnswer() {
+                const answer = document.getElementById('answer').value.trim().toLowerCase();
+                const result = document.getElementById('result');
+                if (answer === 'paris') {
+                    result.textContent = 'Correct! The capital of France is Paris.';
+                    result.style.color = 'green';
+                } else {
+                    result.textContent = 'Incorrect. Please try again.';
+                    result.style.color = 'red';
+                }
+            }
+            function checkAnswer2() {
+                const answer2 = document.getElementById('answer2').value.trim().toLowerCase();
+                const result = document.getElementById('result');
+                if (answer2 === 'new delhi') {
+                    result.textContent = 'Correct! The capital of India is New Delhi.';
+                    result.style.color = 'green';
+                } else {
+                    result.textContent = 'Incorrect. Please try again.';
+                    result.style.color = 'red';
+                }
+            }
+            function checkAnswer3() {
+                const answer3 = document.getElementById('answer3').value.trim().toLowerCase();
+                const result = document.getElementById('result');
+                if (answer3 === 'tokyo') {
+                    result.textContent = 'Correct! The capital of Japan is Tokyo.';
+                    result.style.color = 'green';
+                } else {
+                    result.textContent = 'Incorrect. Please try again.';
+                    result.style.color = 'red';
+                }
+            }
+            function checkAnswer4() {
+                const answer4 = document.getElementById('answer4').value.trim().toLowerCase();
+                const result = document.getElementById('result');
+                if (answer4 === 'canberra') {
+                    result.textContent = 'Correct! The capital of Australia is Canberra.';
+                    result.style.color = 'green';
+                } else {
+                    result.textContent = 'Incorrect. Please try again.';
+                    result.style.color = 'red';
+                }
+            }
+            function checkAnswer5() {
+                const answer5 = document.getElementById('answer5').value.trim().toLowerCase();
+                const result = document.getElementById('result');
+                if (answer5 === 'hypertext transfer protocol secure') {
+                    result.textContent = 'Correct! The full form of HTTPS is Hypertext Transfer Protocol Secure.';
+                    result.style.color = 'green';
+                } else {
+                    result.textContent = 'Incorrect. Please try again.';
+                    result.style.color = 'red';
+                }
+            }
+        </script>
+    </body>

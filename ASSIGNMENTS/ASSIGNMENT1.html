@@ -1,135 +1,593 @@
-<!DOCTYPE html>
-<html
-    <head>
-        <title>Quiz Challenge</title>
-    </head>
-    <body>
-        <h1 allign="center">Quiz Challenge</h1>
-        <div id="form" style="width:400px; height: 300px; border:6px solid rgb(17, 16, 20);background-color: rgb(197, 181, 247);">
-            <form>
-                <p>Name:</p>
-            <input type="text" id="name" placeholder="Name">
-            <p>Branch:</p>
-            <input type="text" id="branch" placeholder="Branch">
-            <p>Gender:</p>
-            <select id="gender">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-            </select>
-            <p>Roll No:</p>
-            <input type="text" id="roll" placeholder="Roll No">
-        </select>
-        <button onclick="submit">Submit</button>
-        <script>
-            function submit() {
-                const name = document.getElementById('name').value;
-                const branch = document.getElementById('branch').value;
-                const gender = document.getElementById('gender').value;
-                const roll = document.getElementById('roll').value;
-                
-            }
-        </script>
-        </form>
-        <p>Answer the following question:</p>
-        <p>1.What is the capital of France?</p>
-       <select id="answer">
-           <option value="paris">Paris</option>
-           <option value="london">London</option>
-           <option value="berlin">Berlin</option>
-           <option value="madrid">Madrid</option>
-       </select>
-       <button onclick="checkAnswer()">Submit</button>
-       <p>2.What is the capital of India?</p>
-       <select id="answer2">
-           <option value="new delhi">New Delhi</option>
-           <option value="mumbai">Mumbai</option>
-           <option value="bangalore">Bangalore</option>
-           <option value="hyderabad">Hyderabad</option>
-       </select>
-       <button onclick="checkAnswer2()">Submit</button>
-       <p>3.What is the capital of Japan?</p>
-       <select id="answer3">
-           <option value="tokyo">Tokyo</option>
-           <option value="osaka">Osaka</option>
-           <option value="kyoto">Kyoto</option>
-           <option value="hiroshima">Hiroshima</option>
-       </select>
-       <button onclick="checkAnswer3()">Submit</button>
-       <p>4.What is the capital of Australia?</p>
-       <select id="answer4">
-           <option value="canberra">Canberra</option>
-           <option value="sydney">Sydney</option>
-           <option value="melbourne">Melbourne</option>
-           <option value="brisbane">Brisbane</option>
-       </select>
-       <button onclick="checkAnswer4()">Submit</button>
-       <p>5.Full form of HTTPS</p>
-       <select id="answer5">
-           <option value="hypertext transfer protocol secure">Hypertext Transfer Protocol Secure</option>
-           <option value="hypertext transfer protocol">Hypertext Transfer Protocol</option>
-           <option value="hypertext to protocol secure">Hypertext Transfer Protocol Secure</option>
-           <option value="hypertext transfer protocol security">Hypertext Transfer Protocol Secure</option>
-       </select>
-       <button onclick="checkAnswer5()">Submit</button>
-       <p id="result"></p>
 
-      <script>
-            
-            function checkAnswer() {
-                const answer = document.getElementById('answer').value.trim().toLowerCase();
-                const result = document.getElementById('result');
-                if (answer === 'paris') {
-                    result.textContent = 'Correct! The capital of France is Paris.';
-                    result.style.color = 'green';
-                } else {
-                    result.textContent = 'Incorrect. Please try again.';
-                    result.style.color = 'red';
-                }
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Challenge</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 600px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        h2 {
+            color: #444;
+        }
+
+        input, select {
+            width: 95%;
+            padding: 10px;
+            margin: 8px 0 15px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+
+        #timer {
+            text-align: right;
+            font-size: 20px;
+            font-weight: bold;
+            color: red;
+        }
+
+        #progress {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            margin-top: 30px;
+        }
+
+        #resultPage {
+            text-align: center;
+        }
+
+        .score {
+            font-size: 30px;
+            color: green;
+            font-weight: bold;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .wrong {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- ================= STUDENT DETAILS ================= -->
+
+    <div id="studentPage" class="page active">
+
+        <h1>Quiz Challenge</h1>
+
+        <h2>Student Details</h2>
+
+        <form id="studentForm">
+
+            <label>Name:</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+
+            <label>Branch:</label>
+            <input type="text" id="branch" placeholder="Enter your branch" required>
+
+            <label>Gender:</label>
+            <select id="gender">
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label>Roll No:</label>
+            <input type="text" id="roll" placeholder="Enter roll number" required>
+
+            <button type="button" onclick="startQuiz()">
+                Start Quiz
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- ================= QUESTION 1 ================= -->
+
+    <div id="question1" class="page">
+
+        <div id="timer"></div>
+
+        <div id="progress">
+            Question 1 of 5
+        </div>
+
+        <h2>Question 1</h2>
+
+        <p>What is the capital of France?</p>
+
+        <select id="answer1">
+            <option value="">Select Answer</option>
+            <option value="paris">Paris</option>
+            <option value="london">London</option>
+            <option value="berlin">Berlin</option>
+            <option value="madrid">Madrid</option>
+        </select>
+
+        <br>
+
+        <button onclick="nextQuestion(1)">
+            Next
+        </button>
+
+    </div>
+
+
+    <!-- ================= QUESTION 2 ================= -->
+
+    <div id="question2" class="page">
+
+        <div id="timer2"></div>
+
+        <div id="progress">
+            Question 2 of 5
+        </div>
+
+        <h2>Question 2</h2>
+
+        <p>What is the capital of India?</p>
+
+        <select id="answer2">
+            <option value="">Select Answer</option>
+            <option value="new delhi">New Delhi</option>
+            <option value="mumbai">Mumbai</option>
+            <option value="bangalore">Bangalore</option>
+            <option value="hyderabad">Hyderabad</option>
+        </select>
+
+        <br>
+
+        <button onclick="nextQuestion(2)">
+            Next
+        </button>
+
+    </div>
+
+
+    <!-- ================= QUESTION 3 ================= -->
+
+    <div id="question3" class="page">
+
+        <div id="timer3"></div>
+
+        <div id="progress">
+            Question 3 of 5
+        </div>
+
+        <h2>Question 3</h2>
+
+        <p>What is the capital of Japan?</p>
+
+        <select id="answer3">
+            <option value="">Select Answer</option>
+            <option value="tokyo">Tokyo</option>
+            <option value="osaka">Osaka</option>
+            <option value="kyoto">Kyoto</option>
+            <option value="hiroshima">Hiroshima</option>
+        </select>
+
+        <br>
+
+        <button onclick="nextQuestion(3)">
+            Next
+        </button>
+
+    </div>
+
+
+    <!-- ================= QUESTION 4 ================= -->
+
+    <div id="question4" class="page">
+
+        <div id="timer4"></div>
+
+        <div id="progress">
+            Question 4 of 5
+        </div>
+
+        <h2>Question 4</h2>
+
+        <p>What is the capital of Australia?</p>
+
+        <select id="answer4">
+            <option value="">Select Answer</option>
+            <option value="canberra">Canberra</option>
+            <option value="sydney">Sydney</option>
+            <option value="melbourne">Melbourne</option>
+            <option value="brisbane">Brisbane</option>
+        </select>
+
+        <br>
+
+        <button onclick="nextQuestion(4)">
+            Next
+        </button>
+
+    </div>
+
+
+    <!-- ================= QUESTION 5 ================= -->
+
+    <div id="question5" class="page">
+
+        <div id="timer5"></div>
+
+        <div id="progress">
+            Question 5 of 5
+        </div>
+
+        <h2>Question 5</h2>
+
+        <p>What is the full form of HTTPS?</p>
+
+        <select id="answer5">
+            <option value="">Select Answer</option>
+
+            <option value="hypertext transfer protocol secure">
+                Hypertext Transfer Protocol Secure
+            </option>
+
+            <option value="hypertext transfer protocol">
+                Hypertext Transfer Protocol
+            </option>
+
+            <option value="hypertext to protocol secure">
+                Hypertext To Protocol Secure
+            </option>
+
+            <option value="hypertext transfer protocol security">
+                Hypertext Transfer Protocol Security
+            </option>
+
+        </select>
+
+        <br>
+
+        <button onclick="submitQuiz()">
+            Submit Quiz
+        </button>
+
+    </div>
+
+
+    <!-- ================= RESULT PAGE ================= -->
+
+    <div id="resultPage" class="page">
+
+        <h1>Quiz Completed 🎉</h1>
+
+        <h2>Student Details</h2>
+
+        <p id="studentName"></p>
+        <p id="studentBranch"></p>
+        <p id="studentRoll"></p>
+
+        <h2>Your Result</h2>
+
+        <p class="score" id="score"></p>
+
+        <p id="percentage"></p>
+
+        <p id="message"></p>
+
+        <button onclick="restartQuiz()">
+            Restart Quiz
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    // ================= VARIABLES =================
+
+    let currentQuestion = 1;
+
+    let score = 0;
+
+    let timeLeft = 60;
+
+    let timer;
+
+
+    // ================= START QUIZ =================
+
+    function startQuiz() {
+
+        let name = document.getElementById("name").value;
+
+        let branch = document.getElementById("branch").value;
+
+        let gender = document.getElementById("gender").value;
+
+        let roll = document.getElementById("roll").value;
+
+
+        if (name === "" || branch === "" || gender === "" || roll === "") {
+
+            alert("Please fill all student details.");
+
+            return;
+
+        }
+
+
+        document.getElementById("studentPage")
+            .classList.remove("active");
+
+        document.getElementById("question1")
+            .classList.add("active");
+
+
+        startTimer();
+
+    }
+
+
+    // ================= TIMER =================
+
+    function startTimer() {
+
+        timeLeft = 60;
+
+        updateTimer();
+
+
+        timer = setInterval(function() {
+
+            timeLeft--;
+
+            updateTimer();
+
+
+            if (timeLeft <= 0) {
+
+                clearInterval(timer);
+
+                alert("Time's up!");
+
+                submitQuiz();
+
             }
-            function checkAnswer2() {
-                const answer2 = document.getElementById('answer2').value.trim().toLowerCase();
-                const result = document.getElementById('result');
-                if (answer2 === 'new delhi') {
-                    result.textContent = 'Correct! The capital of India is New Delhi.';
-                    result.style.color = 'green';
-                } else {
-                    result.textContent = 'Incorrect. Please try again.';
-                    result.style.color = 'red';
-                }
-            }
-            function checkAnswer3() {
-                const answer3 = document.getElementById('answer3').value.trim().toLowerCase();
-                const result = document.getElementById('result');
-                if (answer3 === 'tokyo') {
-                    result.textContent = 'Correct! The capital of Japan is Tokyo.';
-                    result.style.color = 'green';
-                } else {
-                    result.textContent = 'Incorrect. Please try again.';
-                    result.style.color = 'red';
-                }
-            }
-            function checkAnswer4() {
-                const answer4 = document.getElementById('answer4').value.trim().toLowerCase();
-                const result = document.getElementById('result');
-                if (answer4 === 'canberra') {
-                    result.textContent = 'Correct! The capital of Australia is Canberra.';
-                    result.style.color = 'green';
-                } else {
-                    result.textContent = 'Incorrect. Please try again.';
-                    result.style.color = 'red';
-                }
-            }
-            function checkAnswer5() {
-                const answer5 = document.getElementById('answer5').value.trim().toLowerCase();
-                const result = document.getElementById('result');
-                if (answer5 === 'hypertext transfer protocol secure') {
-                    result.textContent = 'Correct! The full form of HTTPS is Hypertext Transfer Protocol Secure.';
-                    result.style.color = 'green';
-                } else {
-                    result.textContent = 'Incorrect. Please try again.';
-                    result.style.color = 'red';
-                }
-            }
-        </script>
-    </body>
+
+        }, 1000);
+
+    }
+
+
+    function updateTimer() {
+
+        let timerElement =
+            document.getElementById("timer");
+
+        timerElement.innerHTML =
+            "Time Left: " + timeLeft + " seconds";
+
+    }
+
+
+    // ================= NEXT QUESTION =================
+
+    function nextQuestion(questionNumber) {
+
+        checkAnswer(questionNumber);
+
+
+        document.getElementById(
+            "question" + questionNumber
+        ).classList.remove("active");
+
+
+        let next = questionNumber + 1;
+
+
+        document.getElementById(
+            "question" + next
+        ).classList.add("active");
+
+
+        currentQuestion = next;
+
+    }
+
+
+    // ================= CHECK ANSWER =================
+
+    function checkAnswer(questionNumber) {
+
+        let answer =
+            document.getElementById(
+                "answer" + questionNumber
+            ).value;
+
+
+        let correctAnswers = {
+
+            1: "paris",
+
+            2: "new delhi",
+
+            3: "tokyo",
+
+            4: "canberra",
+
+            5: "hypertext transfer protocol secure"
+
+        };
+
+
+        if (answer === correctAnswers[questionNumber]) {
+
+            score++;
+
+        }
+
+    }
+
+
+    // ================= SUBMIT QUIZ =================
+
+    function submitQuiz() {
+
+        clearInterval(timer);
+
+
+        // Check question 5
+
+        let answer5 =
+            document.getElementById("answer5").value;
+
+
+        if (
+            answer5 ===
+            "hypertext transfer protocol secure"
+        ) {
+
+            score++;
+
+        }
+
+
+        document.getElementById("question5")
+            .classList.remove("active");
+
+
+        document.getElementById("resultPage")
+            .classList.add("active");
+
+
+        // Student information
+
+        let name =
+            document.getElementById("name").value;
+
+        let branch =
+            document.getElementById("branch").value;
+
+        let roll =
+            document.getElementById("roll").value;
+
+
+        document.getElementById("studentName")
+            .innerHTML = "Name: " + name;
+
+        document.getElementById("studentBranch")
+            .innerHTML = "Branch: " + branch;
+
+        document.getElementById("studentRoll")
+            .innerHTML = "Roll No: " + roll;
+
+
+        // Score
+
+        document.getElementById("score")
+            .innerHTML =
+            score + " / 5";
+
+
+        let percentage =
+            (score / 5) * 100;
+
+
+        document.getElementById("percentage")
+            .innerHTML =
+            "Percentage: " + percentage + "%";
+
+
+        // Message
+
+        if (percentage >= 80) {
+
+            document.getElementById("message")
+                .innerHTML =
+                "Excellent performance! 🎉";
+
+        }
+        else if (percentage >= 50) {
+
+            document.getElementById("message")
+                .innerHTML =
+                "Good job! Keep practicing. 👍";
+
+        }
+        else {
+
+            document.getElementById("message")
+                .innerHTML =
+                "Keep learning and try again. 💪";
+
+        }
+
+    }
+
+
+    // ================= RESTART =================
+
+    function restartQuiz() {
+
+        location.reload();
+
+    }
+
+</script>
+
+</body>
+</html>
+
